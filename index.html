@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="heart.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuke For My Favorite Cousin Malyne! 🌟</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="heart.png">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            animation: fadeIn 0.5s ease-in-out;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        h2 {
+            color: #00796b;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+
+        .btn-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: background-color 0.2s;
+        }
+
+        .btn-yes {
+            background-color: #00897b;
+            color: white;
+            z-index: 2;
+        }
+
+        .btn-yes:hover {
+            background-color: #00695c;
+        }
+
+        .btn-no {
+            background-color: #b0bec5;
+            color: white;
+            z-index: 2;
+        }
+
+        .btn-no:hover {
+            background-color: #90a4ae;
+        }
+
+        .running {
+            position: fixed !important;
+            transition: all 0.1s ease-out;
+        }
+
+        .slider-container {
+            margin: 20px 0;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        input[type=range] {
+            width: 100%;
+            accent-color: #00897b;
+        }
+
+        .congrats-box, .final-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .congrats-box h1 {
+            color: #00796b;
+            margin-bottom: 10px;
+        }
+
+        .congrats-box p {
+            color: #555;
+            font-size: 1.2rem;
+        }
+
+        .final-box h1 {
+            color: #00796b;
+            margin: 0 0 20px 0;
+            font-size: 2.5rem;
+        }
+        
+        .final-image {
+            max-width: 300px;
+            border-radius: 50%;
+            border: 5px solid #00897b;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            object-fit: cover;
+            height: 300px;
+            width: 300px;
+        }
+
+        .final-text {
+            font-size: 1.4rem;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* Watermark with your Instagram handle */
+        .watermark {
+            font-size: 0.95rem;
+            color: #00796b;
+            font-weight: 600;
+            background-color: #e0f2f1;
+            padding: 6px 12px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            margin-top: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE ONE -->
+    <div id="page1" class="page active">
+        <h2>Can you survive a single family gathering without causing drama, Malyne? 🤭</h2>
+        <div class="btn-container">
+            <button id="run-btn" class="btn-yes" onmouseover="moveRandom('run-btn')" ontouchstart="moveRandom('run-btn')" onclick="moveRandom('run-btn')">Yes</button>
+            <button class="btn-no" onclick="nextPage(2)">No way</button>
+        </div>
+    </div>
+
+    <!-- PAGE TWO -->
+    <div id="page2" class="page">
+        <h2>Am I your absolute favorite cousin? 😎</h2>
+        <div class="btn-container">
+            <button class="btn-yes" onclick="nextPage(3)">Obviously yes</button>
+            <button id="teleport-btn" class="btn-no" onmouseover="moveRandom('teleport-btn')" ontouchstart="moveRandom('teleport-btn')" onclick="moveRandom('teleport-btn')">Not even close</button>
+        </div>
+    </div>
+
+    <!-- PAGE THREE -->
+    <div id="page3" class="page">
+        <h2>Rate how cool I am as your cousin: 🌟</h2>
+        <div class="slider-container">
+            <input type="range" id="slider1" min="1" max="10" value="5" oninput="handleSlider1(this.value)">
+        </div>
+        <p id="slider1-text" style="color: #00796b; font-weight: bold;">10/10 - Perfection! As expected! 😉</p>
+        <button class="btn-yes" onclick="nextPage(4)" style="margin-top: 20px;">Next</button>
+    </div>
+
+    <!-- PAGE FOUR -->
+    <div id="page4" class="page">
+        <h2>Rate how much trouble you cause in the family group chat: 🌪️</h2>
+        <div class="slider-container">
+            <input type="range" id="slider2" min="1" max="10" value="5" oninput="handleSlider2(this.value)">
+        </div>
+        <p id="slider2-text" style="color: #00796b; font-weight: bold;">1/10 - Total angel! 😇</p>
+        <button class="btn-yes" onclick="nextPage(5)" style="margin-top: 20px;">Next</button>
+    </div>
+
+    <!-- PAGE FIVE (GIFT) -->
+    <div id="page5" class="page">
+        <h2>What birthday or holiday present are you buying me, Malyne? 🎁</h2>
+        <div class="btn-container">
+            <button id="gift-handshake" class="btn-no" onmouseover="moveRandom('gift-handshake')" ontouchstart="moveRandom('gift-handshake')" onclick="moveRandom('gift-handshake')">A Friendly Handshake 🤝</button>
+            <button id="gift-nothing" class="btn-no" onmouseover="moveRandom('gift-nothing')" ontouchstart="moveRandom('gift-nothing')" onclick="moveRandom('gift-nothing')">Nothing, I'm broke 💸</button>
+            <button class="btn-yes" onclick="nextPage(6)">A Mercedes Benz 🚗</button>
+        </div>
+    </div>
+
+    <!-- PAGE SIX -->
+    <div id="page6" class="page">
+        <h2>Do you promise to back me up when our parents/family start complaining? 🤝</h2>
+        <div class="btn-container">
+            <button id="cousin-yes" class="btn-yes" onclick="nextPage(7)">Always! 💯</button>
+            <button id="cousin-no" class="btn-no" onmouseover="moveRandom('cousin-no')" ontouchstart="moveRandom('cousin-no')" onclick="moveRandom('cousin-no')">No</button>
+        </div>
+    </div>
+
+    <!-- CONGRATULATIONS SCREEN -->
+    <div id="page7" class="page">
+        <div class="congrats-box">
+            <h1>🎉 Achievement Unlocked! 🎉</h1>
+            <p>You are officially crowned the Best Cousin Ever! 👑🥂</p>
+            <button class="btn-yes" onclick="nextPage(8)" style="margin-top: 30px;">One last thing...</button>
+        </div>
+    </div>
+
+    <!-- FINAL PAGE WITH WATERMARK -->
+    <div id="page8" class="page">
+        <div class="final-box">
+            <h1>Just for you, Malyne 🌟</h1>
+            <!-- Make sure Malyne's photo is named image_0.png in the same folder -->
+            <img src="Malyne.jpg" alt="Malyne" class="final-image">
+            <p class="final-text">All of this was built specially for my favorite cousin From me, Alyne.</p>
+            
+            <!-- Watermark with your Instagram handle -->
+            <div class="watermark">contact @me.mr.dollar to get ur own website for free</div>
+        </div>
+    </div>
+
+    <script>
+        function nextPage(pageNumber) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page' + pageNumber).classList.add('active');
+        }
+
+        function moveRandom(btnId) {
+            const btn = document.getElementById(btnId);
+            
+            if (!btn.classList.contains('running')) {
+                btn.classList.add('running');
+            }
+
+            const maxX = window.innerWidth - btn.offsetWidth - 40;
+            const maxY = window.innerHeight - btn.offsetHeight - 40;
+            
+            const randomX = Math.floor(Math.random() * maxX) + 20;
+            const randomY = Math.floor(Math.random() * maxY) + 20;
+
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        function handleSlider1(val) {
+            const slider = document.getElementById('slider1');
+            const text = document.getElementById('slider1-text');
+            text.innerText = val + "/10 - Wait, let me fix that to 10! 😉";
+            
+            setTimeout(() => {
+                slider.value = 10;
+                text.innerText = "10/10 - Perfection! As expected! 😉";
+            }, 300);
+        }
+
+        function handleSlider2(val) {
+            const slider = document.getElementById('slider2');
+            const text = document.getElementById('slider2-text');
+            text.innerText = val + "/10 - Nice try hiding the family chaos! 😜";
+            
+            setTimeout(() => {
+                slider.value = 1;
+                text.innerText = "1/10 - Total angel! 😇";
+            }, 300);
+        }
+    </script>
+</body>
+</html>
